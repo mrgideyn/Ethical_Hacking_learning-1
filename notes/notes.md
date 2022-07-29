@@ -131,3 +131,70 @@ sudo apt-get install openssh-server
 sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
+kali vm, allow only one host for ssh (host machine)
+```
+sudo vim /etc/hosts.deny
+    sshd: ALL
+sudo vim /etc/hosts.allow
+    sshd: <host machine ip>
+```
+
+change keyboard layout on metasploitabe : [not required](https://zsecurity.org/forums/topic/how-to-change-the-keyboard-layout-on-the-metaspoitable-vm/)
+
+setup network adapter on bridged network to be accessible from hyper-V kali VM [source : Virtual Box Switch Types](https://www.philipdaniels.com/blog/2016/vm-networking-overview/)
+
+## Scans - nmap
+cmd : `sudo arp -a` 
+arp : access machine arp cache
+
+cmd : `sudo netdiscover` = list connected assets on local network (192.168.<1-254>.0/24)
+
+`nmap <metasploitable ip<>`
+[type of scan](https://nmap.org/man/fr/man-port-scanning-techniques.html)
+
+SYN scan :
+`nmap -sS <metasploitable ip>`
+send SYN request, if response=SYN/ACK then port=open
+no connection open at end of scan
+
+SYN full handshake scan :
+`nmap -sT <metasploitable ip>`
+send SYN request,
+if response=SYN/ACK then port=open, then send ACK to establish conn
+if response=RST, then port=closed
+
+-sU(Scan UDP)
+
+--scanflags(Scan TCP personnalisé)
+-sI <zombie host[:probeport]>[Scan passif -- idlescan](https://nmap.org/book/idlescan.html)
+
+## Get target OS
+`nmap -O <metasploitable ip>`
+When creating honeypot : change mac address so it doesn't have standard mac address of vm (example 08:00:27:* for VB)
+
+
+## Get service name and version
+`nmap -sV <metasploitable ip> --version-intensity <1-9, default=7>`
+
+more aggressive scan including nmap scripts
+`nmap -A <metasploitable ip>`
+
+## limit nmap port range
+list up hosts : `nmap -sn <local net work ip>/24`
+
+limit port : `nmap -p 80,22 <ip>`
+all port : : `nmap -p 1-65534 <ip>`
+scan top 100 ports : : `nmap -F <ip>`
+output results to file : `nmap <options> >> file.txt` OR `nmap <options> -oN file.txt`
+
+## Bypass Firewall/IDS/IPS
+- use decoy and packet fragmentation
+
+fragmentation :
+- `sudo nmap -f <ip>`
+- `sudo nmap -f -f <ip>`
+- `sudo nmap -f <ip>`
+
+decoy : scan from multiple ip address
+- `sudo nmap -D RND:<number of random ip addresses> <ip>`
+- `sudo nmap -D <ip a>,<ip b>,ME <ip>`
