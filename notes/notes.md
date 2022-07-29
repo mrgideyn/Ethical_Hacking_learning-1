@@ -123,8 +123,9 @@ TCP garantee packet are received and received in order + resend if fail/corrupti
 no reception garanty, tradeof = much faster than TCP
 use for broadcast/live/etc.
 
-## setup vulnerable machines
+## setup vulnerable machines and kali
 - https://www.rapid7.com/blog/post/2011/12/23/where-can-i-find-vulnerable-machines-for-my-penetration-testing-lab/
+
 install ssh on kali
 ```
 sudo apt-get install openssh-server
@@ -198,3 +199,14 @@ fragmentation :
 decoy : scan from multiple ip address
 - `sudo nmap -D RND:<number of random ip addresses> <ip>`
 - `sudo nmap -D <ip a>,<ip b>,ME <ip>`
+
+impersonate ip adress
+- `sudo nmap  -S <ip to impersonate if use of 8.8.8.8 we won't get the request response> -Pn` : but we 
+
+options :
+-S 8.8.8.8 (impersonate ip for scan)
+-Pn (treat all hosts as online)
+-e (use specific interface) eth0
+-g (specify scan source port)
+-T (set timing template)
+
