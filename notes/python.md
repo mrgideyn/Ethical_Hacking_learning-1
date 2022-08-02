@@ -244,6 +244,9 @@ print(triple_sum(4,2,num1=6,num2=9))
 ## Python File I/O
 - ref to vanille "python_learning" py project folder
 
+## [Purepath lib (win and*nix compatible paths)](https://docs.python.org/fr/3/library/pathlib.html)
+
+
 ```
 ```
 ```
