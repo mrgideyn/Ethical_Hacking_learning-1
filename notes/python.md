@@ -235,7 +235,14 @@ print(triple_sum(4,2,num1=6,num2=9))
 
 ## Modules in python
 - [classes + scope doc](https://docs.python.org/3/tutorial/classes.html)
-- 
+- ref to vanille "python_learning" py project folder
+
+## Error handling
+- [builtin exception](https://docs.python.org/3/library/exceptions.html)
+- ref to vanille "python_learning" py project folder
+
+## Python File I/O
+- ref to vanille "python_learning" py project folder
 
 ```
 ```
